@@ -4,18 +4,15 @@ import javax.swing.Timer;
 
 public class Chords {
    static MidiChannel[] mc = null;
- public static void main(String[] args) throws MidiUnavailableException, InterruptedException {
-  setup();
-  major(0,1);
-  firstinversionmaj(0,1);
-  major(12,4);
- }
+   public static void main(String[] args) throws MidiUnavailableException, InterruptedException {
+   setup();
+   }
 public static void setup() throws MidiUnavailableException {
-  Synthesizer syn = MidiSystem.getSynthesizer();
-  syn.open();   
-  mc = syn.getChannels();
-  Instrument[] instr = syn.getDefaultSoundbank().getInstruments();
-  syn.loadInstrument(instr[91]);
+   Synthesizer syn = MidiSystem.getSynthesizer();
+   syn.open();   
+   mc = syn.getChannels();
+   Instrument[] instr = syn.getDefaultSoundbank().getInstruments();
+   syn.loadInstrument(instr[91]);
  }
 public static void major(int key,int rep) throws InterruptedException, MidiUnavailableException{
     for (int i=0; i<rep; i++){   
