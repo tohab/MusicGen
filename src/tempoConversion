@@ -1,5 +1,6 @@
-public static void tempoConversion (int quarterNotesPerMinutes) {
+public static int tempoConversion (int quarterNotesPerMinutes) {
 	    int x = quarterNotesPerMinutes;
 	    x = 1;
 	    double beatsPerMillisec = (60,000/x);
+	    return eatsPerMillisec;
 	   }
