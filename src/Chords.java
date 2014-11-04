@@ -68,27 +68,36 @@ public static void start(int key, int tone, int tempo) throws InterruptedExcepti
         while(true){
             major(key,2,tempo);
             if (Math.random()<0.5){
+                if (Math.random()<0.4){
+                firstinversionmaj(key-5,2,tempo);
+                }else{
                 major(key+7,2,tempo);
                 if (Math.random()<0.3){
                     minor(key+9,2,tempo);
                     minor(key+2,1,tempo);
                     major(key+7,1,tempo);
                 }
-            }else{
-                major(key+5,2,tempo);
-                if (Math.random()>0.5)
-                    major(key+7,2,tempo);
                 }
-        }
-    }else{
+            }else{
+             major(key+5,2,tempo);
+              if (Math.random()>0.5)
+                 major(key+7,2,tempo);
+               
+           }
+        }    
+      }else{
          while(true){
             minor(key,2,tempo);
             if (Math.random()<0.5){
+                if (Math.random()<0.4){
+                firstinversionmaj(key-5,2,tempo);
+                }else{
                 major(key+7,2,tempo);
                 if (Math.random()<0.3){
                     major(key+9,2,tempo);
                     major(key+2,1,tempo);
                     major(key+7,1,tempo);
+                }
                 }
             }else{
                 minor(key+5,2,tempo);
