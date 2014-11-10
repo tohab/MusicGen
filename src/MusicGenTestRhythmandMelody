@@ -1,0 +1,33 @@
+import javax.sound.midi.*;
+import javax.swing.Timer;
+
+
+public class MusicGenTestRhythmandMelody {
+	
+	
+	public static double tempoConversion (double quarterNotesPerMinute) {
+	    double x = quarterNotesPerMinute;
+	    
+	    double beatsPerMillisec = (60000.0/x);
+	    return beatsPerMillisec;
+	   }
+	   
+	   
+	public static double[] rhythm (double quarterNotesPerMinute) {
+	    // 200 milliseconds is an eighth note 
+	    double[] rhythm = new double[5];
+	    double y = quarterNotesPerMinute;
+	    double x = 0;
+	    x = tempoConversion(y);
+	    rhythm[0] = x*4; //whole note
+	    rhythm[1] = x*2; // half note
+	    rhythm[2] = x; // quarter note
+	    rhythm[3] = (x/2.0);
+	    rhythm[4] = (x/4.0);
+	    return rhythm;
+	    
+	//public static void major( int key, int rep)
+   }
+   
+   
+}
