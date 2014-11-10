@@ -85,25 +85,32 @@ public static void start(int key, int tone, int tempo) throws InterruptedExcepti
             major(key,2,tempo);
             if (Math.random()<0.5){
                 if (Math.random()<0.4){
-                firstinversionmaj(key-5,2,tempo);
+                    if (Math.random()<0.55){
+                        firstinversionmaj(key-5,2,tempo);
+                    }else{
+                        major(key+2,2,tempo);
+                        secondinversionmaj(key-5,2,tempo);
+                        firstinversionmaj(key-5,2,tempo);
+                    }
                 }else{
                 major(key+7,2,tempo);
-                if (Math.random()<0.45){
+                if (Math.random()<0.4){
                     minor(key+9,2,tempo);
                     minor(key+2,1,tempo);
                     major(key+7,1,tempo);
                 }
                 }
             }else{
-               if (Math.random()<0.4){
+                if (Math.random()<0.4){
                     secondinversionmaj(key-7,2,tempo);
                     if (Math.random()<0.5)
                     firstinversionmaj(key-5,2,tempo);
-                   } else{
-                  major(key+5,2,tempo);
-                   if (Math.random()>0.5)
-                     major(key+7,2,tempo);
-                   }
+                }
+                else{
+             major(key+5,2,tempo);
+              if (Math.random()<0.5)
+                 major(key+7,2,tempo);
+                }
            }
         }    
       }else{
@@ -114,7 +121,7 @@ public static void start(int key, int tone, int tempo) throws InterruptedExcepti
                 firstinversionmaj(key-5,2,tempo);
                 }else{
                 major(key+7,2,tempo);
-                if (Math.random()<0.3){
+                if (Math.random()<0.45){
                     major(key+9,2,tempo);
                     major(key+2,1,tempo);
                     major(key+7,1,tempo);
