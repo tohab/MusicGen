@@ -79,10 +79,15 @@ public static void start(int key, int tone, int tempo) throws InterruptedExcepti
                 }
                 }
             }else{
-             major(key+5,2,tempo);
-              if (Math.random()>0.5)
-                 major(key+7,2,tempo);
-               
+               if (Math.random()<0.4){
+                    secondinversionmaj(key-7,2,tempo);
+                    if (Math.random()<0.5)
+                    firstinversionmaj(key-5,2,tempo);
+                   } else{
+                  major(key+5,2,tempo);
+                   if (Math.random()>0.5)
+                     major(key+7,2,tempo);
+                   }
            }
         }    
       }else{
