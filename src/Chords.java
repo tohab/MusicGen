@@ -72,7 +72,7 @@ public static void start(int key, int tone, int tempo) throws InterruptedExcepti
                 firstinversionmaj(key-5,2,tempo);
                 }else{
                 major(key+7,2,tempo);
-                if (Math.random()<0.3){
+                if (Math.random()<0.45){
                     minor(key+9,2,tempo);
                     minor(key+2,1,tempo);
                     major(key+7,1,tempo);
