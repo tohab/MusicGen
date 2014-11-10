@@ -63,6 +63,22 @@ public static void firstinversionmaj(int key,int rep, int tempo) throws Interrup
       mc[5].noteOff(72+key,0);
     }
   }
+public static void secondinversionmaj(int key,int rep, int tempo) throws InterruptedException, MidiUnavailableException{
+    for (int i=0; i<rep; i++){   
+      mc[5].noteOn(67+key,100);
+      new Thread().sleep(tempo);
+      mc[5].noteOff(67+key,0);
+      mc[5].noteOn(76+key,100);
+      new Thread().sleep(tempo);
+      mc[5].noteOff(76+key,0);
+      mc[5].noteOn(72+key,100);
+      new Thread().sleep(tempo);
+      mc[5].noteOff(72+key,0);
+      mc[5].noteOn(76+key,100);
+      new Thread().sleep(tempo);
+      mc[5].noteOff(76+key,0);
+    }
+  }
 public static void start(int key, int tone, int tempo) throws InterruptedException, MidiUnavailableException{
     if (tone == 1){
         while(true){
