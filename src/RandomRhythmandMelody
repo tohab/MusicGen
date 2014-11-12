@@ -1,0 +1,74 @@
+import javax.sound.midi.*;
+import javax.swing.Timer;
+
+
+public class RandomRhythmandMelody {
+ 
+ 
+ public static double tempoConversion (double quarterNotesPerMinute) {
+     double x = quarterNotesPerMinute;
+     
+     double beatsPerMillisec = (60000.0/x);
+     return beatsPerMillisec;
+    }
+    
+    
+ public static double[] rhythm (double quarterNotesPerMinute) {
+     // 200 milliseconds is an eighth note 
+     double[] rhythm = new double[5];
+     double y = quarterNotesPerMinute;
+     double x = 0;
+     x = tempoConversion(y);
+     rhythm[0] = x*4; //whole note
+     rhythm[1] = x*2; // half note
+     rhythm[2] = x; // quarter note
+     rhythm[3] = (x/2.0); // eighth note
+     rhythm[4] = (x/4.0); // sixteenth note
+     return rhythm;
+ }
+     
+
+   
+ public static void melody(double quarterNotesPerMinute) throws InterruptedException, MidiUnavailableException { {
+        double[] rhythm = new double[5];
+     double y = quarterNotesPerMinute;
+     double x = 0;
+     x = tempoConversion(y);
+     rhythm[0] = x*4; //whole note
+     rhythm[1] = x*2; // half note
+     rhythm[2] = x; // quarter note
+     rhythm[3] = (x/2.0); // eighth note
+     rhythm[4] = (x/4.0); // sixteenth note
+          
+       int s = 0;
+       s = (int)(Math.random() * 5); // random number to plug into position of rhy array
+       
+       Synthesizer syn = MidiSystem.getSynthesizer();
+  syn.open();   
+  final MidiChannel[] mc = syn.getChannels();
+  Instrument[] instr = syn.getDefaultSoundbank().getInstruments();
+  syn.loadInstrument(instr[109]);
+  for (int i = 0; i < 25; i++) {
+      int ranrhythm = (int)(Math.random() * 5);
+   int ran = (int)(Math.random() * 24) + 48;
+   int ran2 = (int)(Math.random() * 10) + 1;
+   mc[5].noteOn(ran,60*ran2);
+ 
+  }
+  int[] major = {0,2,4,5,7,9,11,12};
+  int[] minor = {0,2,3,5,7,8,11,12};
+  for (int i = 0; i < 150; i++) {
+   mc[5].noteOn(48 + (int)(Math.random()*3)*12 + minor[(int)(Math.random()*8)],100);
+   new Thread().sleep(200);
+  }
+  mc[5].noteOff(0);
+       
+   
+   
+   }
+}
+ public static void main(String[] args) throws InterruptedException, MidiUnavailableException{
+
+   melody(Double.parseDouble(args[0]));
+ }
+}
