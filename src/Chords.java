@@ -3,10 +3,11 @@ import javax.swing.Timer;
 
 
 public class Main {
-   static MidiChannel[] mc = null;
- public static void main(String[] args) throws MidiUnavailableException, InterruptedException {
-  setup();
-  start(4,1,200);
+    static MidiChannel[] mc = null;
+public static void main(String[] args) throws MidiUnavailableException, InterruptedException {
+    setup();
+    start(0,1,100);
+    melody(0,250);
  }
 public static void setup() throws MidiUnavailableException {
   Synthesizer syn = MidiSystem.getSynthesizer();
@@ -79,10 +80,37 @@ public static void secondinversionmaj(int key,int rep, int tempo) throws Interru
       mc[5].noteOff(76+key,0);
     }
   }
+public static void secondinversionmin(int key,int rep, int tempo) throws InterruptedException, MidiUnavailableException{
+    for (int i=0; i<rep; i++){   
+      mc[5].noteOn(67+key,100);
+      new Thread().sleep(tempo);
+      mc[5].noteOff(67+key,0);
+      mc[5].noteOn(75+key,100);
+      new Thread().sleep(tempo);
+      mc[5].noteOff(75+key,0);
+      mc[5].noteOn(72+key,100);
+      new Thread().sleep(tempo);
+      mc[5].noteOff(72+key,0);
+      mc[5].noteOn(75+key,100);
+      new Thread().sleep(tempo);
+      mc[5].noteOff(75+key,0);
+    }
+  }
 public static void start(int key, int tone, int tempo) throws InterruptedException, MidiUnavailableException{
     if (tone == 1){
         while(true){
-            major(key,2,tempo);
+            if (Math.random()<.9){
+                major(key,2,tempo);
+            }else{
+                firstinversionmaj(key-5,2,tempo);
+            }
+            if (Math.random()<0.25){
+                major(key+4,2,tempo);
+                secondinversionmin(key-3,2,tempo);
+                major(key+2,2,tempo);
+                secondinversionmaj(key-5,2,tempo);
+                firstinversionmaj(key-5,2,tempo);
+            }
             if (Math.random()<0.5){
                 if (Math.random()<0.4){
                     if (Math.random()<0.55){
