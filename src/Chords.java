@@ -2,13 +2,22 @@ import javax.sound.midi.*;
 import javax.swing.Timer;
 
 
-public class Main {
+public class Chords {
     static MidiChannel[] mc = null;
-public static void main(String[] args) throws MidiUnavailableException, InterruptedException {
-    setup();
-    start(0,1,100);
-    melody(0,250);
- }
+    public Chords() {
+    	
+    	try {
+    		setup();
+			start(0,1,100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MidiUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
 public static void setup() throws MidiUnavailableException {
   Synthesizer syn = MidiSystem.getSynthesizer();
   syn.open();   
