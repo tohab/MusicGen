@@ -1,7 +1,7 @@
 import javax.sound.midi.*;
 import javax.swing.Timer;
 
-
+/*
 public class Main {
 	static MidiChannel[] mc = null;
 	
@@ -22,7 +22,7 @@ public class Main {
 		}
 		mc[5].noteOff(0);*/
 		
-	}
+	/*}
 	public static void setup() throws MidiUnavailableException {
 		Synthesizer syn = MidiSystem.getSynthesizer();
 		syn.open();   
@@ -33,4 +33,39 @@ public class Main {
 	public static void play(int note, int velocity) {
 		mc[5].noteOn(note,velocity);
 }
+}*/
+
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+ 
+public class Main extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Hello World!");
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+                new Chords();
+            }
+        });
+        
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.show();
+    }
 }
