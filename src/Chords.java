@@ -3,12 +3,20 @@ import javax.swing.Timer;
 
 public class Chords extends Thread {
 	static MidiChannel[] mc = null;
+	int key = 0;
+	int tone = 0;
+	int tempo = 0;
+	
+	private Thread t;
 
-	public Chords(int key, int tone, int tempo) {
+	public Chords(int key1, int tone1, int tempo1) {
+		
 
 		try {
+			key = key1;
+			tone = tone1;
+			tempo = tempo1;
 			setup();
-			start(key, tone, tempo);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
