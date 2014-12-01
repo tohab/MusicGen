@@ -25,7 +25,16 @@ public class Chords extends Thread {
 			e.printStackTrace();
 		}
 	}
-
+	public void start(){
+		if (t ==null){
+			t = new Thread(this);
+			t.start();
+		}
+	}
+	
+	public void run(){
+		start(key,tone,tempo);
+	}
 	public static void setup() throws MidiUnavailableException {
 		Synthesizer syn = MidiSystem.getSynthesizer();
 		syn.open();
