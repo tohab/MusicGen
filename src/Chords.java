@@ -17,6 +17,7 @@ public class Chords extends Thread {
 			tone = tone1;
 			tempo = tempo1;
 			setup();
+<<<<<<< HEAD
 		} catch (MidiUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -32,6 +33,8 @@ public class Chords extends Thread {
 	public void run(){
 		try {
 			start(key,tone,tempo);
+=======
+>>>>>>> FETCH_HEAD
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,6 +43,19 @@ public class Chords extends Thread {
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
+=======
+	public void start(){
+		if (t ==null){
+			t = new Thread(this);
+			t.start();
+		}
+	}
+	
+	public void run(){
+		start(key,tone,tempo);
+	}
+>>>>>>> FETCH_HEAD
 	public static void setup() throws MidiUnavailableException {
 		Synthesizer syn = MidiSystem.getSynthesizer();
 		syn.open();
@@ -218,5 +234,9 @@ public static void start(int key, int tone, int tempo) throws InterruptedExcepti
            }
         }
 }
+<<<<<<< HEAD
+=======
+}
+>>>>>>> FETCH_HEAD
 }
 }
