@@ -20,7 +20,6 @@ import javafx.stage.WindowEvent;
 public class Main extends Application {
 
 	GridPane grid = new GridPane();
-	int tempo = 124;
 	int tone = 1;
 	Slider slider = new Slider();
 
@@ -62,7 +61,6 @@ public class Main extends Application {
 		rb1.setToggleGroup(group);
 		rb1.setSelected(true);
 		rb1.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent event) {
 				tone = 1;
@@ -86,15 +84,15 @@ public class Main extends Application {
 
 	private void setupSlider(Stage primaryStage) {
 		slider.setMin(40);
-		slider.setMax(208);
-		slider.setValue(124);
+		slider.setMax(300);
+		slider.setValue(144);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
 		slider.setMajorTickUnit(40);
 		slider.setMinorTickCount(5);
 		slider.setBlockIncrement(5);
-		slider.setScaleX(2);
-		slider.setScaleY(2);
+		slider.setScaleX(2.5);
+		slider.setScaleY(2.5);
 		
 		grid.add(slider, 15, 25);
 	}
@@ -116,16 +114,7 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				System.out.println("Start da' music!");
 				
-				try {
-					new Chords().start(3, tone, tempoConversion(slider.getValue())) ;
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (MidiUnavailableException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				primaryStage.close();
+				new Chords(3, tone, tempoConversion(slider.getValue())).start();
 
 			}
 		});
