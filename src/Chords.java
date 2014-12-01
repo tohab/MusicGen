@@ -1,14 +1,14 @@
 import javax.sound.midi.*;
 import javax.swing.Timer;
 
-public class Chords {
+public class Chords extends Thread {
 	static MidiChannel[] mc = null;
 
-	public Chords() {
+	public Chords(int key, int tone, int tempo) {
 
 		try {
 			setup();
-			start(0, 1, 350);
+			start(key, tone, tempo);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
