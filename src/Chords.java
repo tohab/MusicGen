@@ -6,6 +6,7 @@ public class Chords extends Thread {
 	int key = 0;
 	int tone = 0;
 	int tempo = 0;
+	static int currentnote = 0;
 
 	private Thread t;
 
@@ -16,6 +17,7 @@ public class Chords extends Thread {
 			tone = tone1;
 			tempo = tempo1;
 			setup();
+
 		} catch (MidiUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,42 +148,61 @@ public class Chords extends Thread {
 			while (true) {
 				if (Math.random() < .9) {
 					major(key, 2, tempo);
+					currentnote = key;
 				} else {
 					firstinversionmaj(key - 5, 2, tempo);
+					currentnote = key - 5;
 				}
 				if (Math.random() < 0.25) {
 					major(key + 4, 2, tempo);
+					currentnote = key + 4;
 					secondinversionmin(key - 3, 2, tempo);
+					currentnote = key -3;
 					major(key + 2, 2, tempo);
+					currentnote = key + 2;
 					secondinversionmaj(key - 5, 2, tempo);
+					currentnote = key - 5;
 					firstinversionmaj(key - 5, 2, tempo);
+					currentnote = key - 5;
 				}
 				if (Math.random() < 0.5) {
 					if (Math.random() < 0.4) {
 						if (Math.random() < 0.55) {
 							firstinversionmaj(key - 5, 2, tempo);
+							currentnote = key - 5;
 						} else {
 							major(key + 2, 2, tempo);
+							currentnote = key +2;
 							secondinversionmaj(key - 5, 2, tempo);
+							currentnote = key - 5;
 							firstinversionmaj(key - 5, 2, tempo);
+							currentnote = key - 5;
 						}
 					} else {
 						major(key + 7, 2, tempo);
+						currentnote = key + 7;
 						if (Math.random() < 0.4) {
 							minor(key + 9, 2, tempo);
+							currentnote = key + 9;
 							minor(key + 2, 1, tempo);
+							currentnote = key + 2;
 							major(key + 7, 1, tempo);
+							currentnote = key + 7;
 						}
 					}
 				} else {
 					if (Math.random() < 0.4) {
 						secondinversionmaj(key - 7, 2, tempo);
+						currentnote = key - 7;
 						if (Math.random() < 0.5)
 							firstinversionmaj(key - 5, 2, tempo);
+							currentnote = key - 5;
 					} else {
 						major(key + 5, 2, tempo);
+						currentnote = key + 5;
 						if (Math.random() < 0.5)
 							major(key + 7, 2, tempo);
+						 currentnote = key + 7;
 					}
 				}
 			}
@@ -231,4 +252,5 @@ public class Chords extends Thread {
 		}
 
 	}
+
 }
