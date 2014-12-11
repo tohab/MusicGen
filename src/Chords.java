@@ -214,42 +214,61 @@ public class Chords extends Thread {
 			while (playing) {
 				if (Math.random() < .9) {
 					minor(key, 2, tempo, volume);
+					currentnote = key;
 				} else {
 					firstinversionmaj(key - 5, 2, tempo, volume);
+					currentnote = key - 5;
 				}
 				if (Math.random() < 0.25) {
 					minor(key + 4, 2, tempo,volume);
+					currentnote = key +4;
 					secondinversionmaj(key - 3, 2, tempo, volume);
+					currentnote = key -3;
 					minor(key + 2, 2, tempo, volume);
+					currentnote = key +2;
 					secondinversionmaj(key - 5, 2, tempo, volume);
+					currentnote = key - 5;
 					firstinversionmaj(key - 5, 2, tempo, volume);
+					currentnote = key - 5;
 				}
 				if (Math.random() < 0.5) {
 					if (Math.random() < 0.4) {
 						if (Math.random() < 0.55) {
 							firstinversionmaj(key - 5, 2, tempo, volume);
+							currentnote = key - 5;
 						} else {
 							minor(key + 2, 2, tempo, volume);
+							currentnote = key +2;
 							secondinversionmaj(key - 5, 2, tempo, volume);
+							currentnote = key -5;
 							firstinversionmaj(key - 5, 2, tempo, volume);
+							currentnote = key - 5;
 						}
 					} else {
 						minor(key + 7, 2, tempo, volume);
+						currentnote = key + 7;
 						if (Math.random() < 0.4) {
 							major(key + 9, 2, tempo, volume);
+							currentnote = key + 9;
 							major(key + 2, 1, tempo, volume);
+							currentnote = key + 2;
 							major(key + 7, 1, tempo, volume);
+							currentnote = key + 7;
 						}
 					}
 				} else {
 					if (Math.random() < 0.4) {
 						secondinversionmaj(key - 7, 2, tempo, volume);
+						currentnote = key - 7;
 						if (Math.random() < 0.5)
 							firstinversionmaj(key - 5, 2, tempo, volume);
+						     currentnote = key - 5;
 					} else {
 						minor(key + 5, 2, tempo, volume);
+						currentnote = key +5;
 						if (Math.random() < 0.5)
 							major(key + 7, 2, tempo, volume);
+							currentnote = key + 7;
 					}
 				}
 			}
