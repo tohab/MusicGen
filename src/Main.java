@@ -31,6 +31,7 @@ public class Main extends Application {
 	static Pane grid = new Pane();
 	int tone = 1;
 	Slider slider = new Slider();
+	Slider volume = new Slider();
 
 	Chords chords;
 
@@ -41,7 +42,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Music Generator");
-		
+
 		// grid.setAlignment(Pos.TOP_LEFT);
 		// grid.setHgap(10);
 		// grid.setVgap(10);
@@ -52,6 +53,8 @@ public class Main extends Application {
 		setupSlider(primaryStage);
 		setupKey(primaryStage);
 		setupImage();
+		setupVolume(primaryStage);
+		setupWelcome(primaryStage);
 
 		// Set red button to close window.
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -60,7 +63,7 @@ public class Main extends Application {
 				System.exit(0);
 			}
 		});
-		
+
 		// Add grid to the scene.
 		primaryStage.close();
 		primaryStage.setScene(new Scene(grid, 600, 400));
@@ -68,28 +71,26 @@ public class Main extends Application {
 	}
 
 	private void setupImage() {
-		
+
 		Image image2 = new Image("back.jpg");
 
 		// simple displays ImageView the image as is
-		/*ImageView iv2 = new ImageView();
-		iv2.setImage(image2);
+		/*
+		 * ImageView iv2 = new ImageView(); iv2.setImage(image2);
+		 * 
+		 * iv2.setLayoutY(0); iv2.setLayoutX(0); grid.getChildren().addAll(iv2);
+		 */
 
-		iv2.setLayoutY(0);
-		iv2.setLayoutX(0);
-		grid.getChildren().addAll(iv2);*/
-		
 		Image image = new Image("gob.png");
 
 		// simple displays ImageView the image as is
 		ImageView iv1 = new ImageView();
 		iv1.setImage(image);
 
-		iv1.setLayoutY(0);
+		iv1.setLayoutY(-20);
 		iv1.setLayoutX(0);
 		grid.getChildren().addAll(iv1);
-		
-		
+
 	}
 
 	private void setupKey(Stage primaryStage) {
@@ -106,7 +107,7 @@ public class Main extends Application {
 			}
 		});
 		rb1.setLayoutX(100);
-		rb1.setLayoutY(175);
+		rb1.setLayoutY(115);
 
 		RadioButton rb2 = new RadioButton("Minor");
 		rb2.setToggleGroup(group);
@@ -118,7 +119,7 @@ public class Main extends Application {
 			}
 		});
 		rb2.setLayoutX(175);
-		rb2.setLayoutY(175);
+		rb2.setLayoutY(115);
 
 		// grid.add(rb1, 15, 17);
 		// grid.add(rb2, 15, 18);
@@ -138,18 +139,40 @@ public class Main extends Application {
 		slider.setScaleY(1.3125);
 
 		slider.setLayoutX(125);
-		slider.setLayoutY(210);
+		slider.setLayoutY(160);
 		grid.getChildren().addAll(slider);
+	}
+	
+	private void setupVolume(Stage primaryStage) {
+		volume.setMin(0);
+		volume.setMax(200);
+		volume.setValue(100);
+		volume.setShowTickLabels(true);
+		volume.setShowTickMarks(true);
+		volume.setMajorTickUnit(50);
+		volume.setMinorTickCount(5);
+		volume.setBlockIncrement(5);
+		volume.setScaleX(1.5);
+		volume.setScaleY(1.3125);
+
+		volume.setLayoutX(125);
+		volume.setLayoutY(210);
+		grid.getChildren().addAll(volume);
 	}
 
 	private void setupWelcome(Stage primaryStage) {
 		// TODO Auto-generated method stub
-		Text scenetitle = new Text("Music Generator");
-		scenetitle.setFont(Font.font("sansserif", FontWeight.NORMAL, 48));
-		scenetitle.setLayoutX(150);
-		scenetitle.setLayoutY(60);
+		Text tempo = new Text("Tempo:");
+		tempo.setFont(Font.font("helvetica", FontWeight.NORMAL, 16));
+		tempo.setLayoutX(30);
+		tempo.setLayoutY(218);
 
-		grid.getChildren().addAll(scenetitle);
+		Text volume = new Text("Volume:");
+		volume.setFont(Font.font("helvetica", FontWeight.NORMAL, 16));
+		volume.setLayoutX(30);
+		volume.setLayoutY(168);
+		
+		grid.getChildren().addAll(tempo, volume);
 	}
 
 	private void setupButton(Stage primaryStage) {
@@ -157,19 +180,20 @@ public class Main extends Application {
 		Button btn = new Button();
 		btn.setText("Start!");
 		btn.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent event) {
-				chords = new Chords(5, tone, tempoConversion(slider.getValue()));
+				chords = null;
+				chords = new Chords(5, tone,
+						tempoConversion(slider.getValue()), (int)volume.getValue());
+				chords.startMusic();
 				chords.start();
-
 			}
 		});
-		
-		btn.setLayoutX(300);
-		btn.setLayoutY(300);
+
+		btn.setLayoutX(320);
+		btn.setLayoutY(200);
 		grid.getChildren().addAll(btn);
-		
+
 		Button btn1 = new Button();
 		btn1.setText("Stop!");
 		btn1.setOnAction(new EventHandler<ActionEvent>() {
@@ -177,11 +201,12 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				chords.stopMusic();
+				chords = null;
 			}
 		});
-		
-		btn1.setLayoutX(350);
-		btn1.setLayoutY(300);
+
+		btn1.setLayoutX(375);
+		btn1.setLayoutY(200);
 
 		grid.getChildren().addAll(btn1);
 
