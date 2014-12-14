@@ -189,9 +189,8 @@ public class Main extends Application {
 				chords.start();
 			}
 		});
-
-		btn.setLayoutX(320);
-		btn.setLayoutY(200);
+		btn.setLayoutX(420);
+		btn.setLayoutY(100);
 		grid.getChildren().addAll(btn);
 
 		Button btn1 = new Button();
@@ -205,8 +204,8 @@ public class Main extends Application {
 			}
 		});
 
-		btn1.setLayoutX(375);
-		btn1.setLayoutY(200);
+		btn1.setLayoutX(475);
+		btn1.setLayoutY(100);
 
 		grid.getChildren().addAll(btn1);
 
