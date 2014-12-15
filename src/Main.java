@@ -77,8 +77,8 @@ public class Main extends Application {
 	}
 
 	int x = 0;
-	private Canvas canvas = new Canvas(394, 100);
-	private GraphicsContext gc = canvas.getGraphicsContext2D();
+	private static Canvas canvas = new Canvas(394, 100);
+	private static GraphicsContext gc = canvas.getGraphicsContext2D();
 
 	private void setupCanvas() {
 		gc.setFill(Color.WHITE);
@@ -100,7 +100,7 @@ public class Main extends Application {
 		grid.getChildren().add(canvas);
 	}
 
-	private void updateCanvas(int note) {
+	public static void updateCanvas(int note) {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
