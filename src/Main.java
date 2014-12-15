@@ -100,7 +100,7 @@ public class Main extends Application {
 		grid.getChildren().add(canvas);
 	}
 
-	private void updateCanvas() {
+	private void updateCanvas(int note) {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
