@@ -1,30 +1,35 @@
-import java.awt.Canvas;
-
-import javax.sound.midi.*;
-import javax.swing.Timer;
-
-import javafx.application.*;
-import javafx.event.*;
-import javafx.geometry.*;
-import javafx.scene.*;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.util.StringConverter;
+import javafx.animation.*;
+import javafx.application.Application;
+import javafx.beans.property.*;
+import javafx.scene.*;
+import javafx.scene.canvas.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application {
 
@@ -55,6 +60,7 @@ public class Main extends Application {
 		setupImage();
 		setupVolume(primaryStage);
 		setupWelcome(primaryStage);
+		setupCanvas();
 
 		// Set red button to close window.
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -68,6 +74,45 @@ public class Main extends Application {
 		primaryStage.close();
 		primaryStage.setScene(new Scene(grid, 600, 400));
 		primaryStage.show();
+	}
+
+	int x = 0;
+	private Canvas canvas = new Canvas(394, 100);
+	private GraphicsContext gc = canvas.getGraphicsContext2D();
+
+	private void setupCanvas() {
+		gc.setFill(Color.WHITE);
+		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		
+
+		gc.setFill(Color.BLACK);
+		gc.fillRect(0, 0, canvas.getWidth(), 2);
+		gc.fillRect(0, canvas.getHeight()-2, canvas.getWidth(), 2);
+		for (int i = 0; i <= 14; i += 1) {
+			gc.fillRect(i * 28, 0, 2, canvas.getHeight());
+			if (i%7 != 0 && i%7 !=3) {
+				gc.fillRect(i * 28 - 8, 0, 20, 70);
+			}
+		}
+
+		canvas.setLayoutX(25);
+		canvas.setLayoutY(275);
+		grid.getChildren().add(canvas);
+	}
+
+	private void updateCanvas() {
+		gc.setFill(Color.WHITE);
+		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+		gc.setFill(Color.BLACK);
+		gc.fillRect(0, 0, canvas.getWidth(), 2);
+		gc.fillRect(0, canvas.getHeight()-2, canvas.getWidth(), 2);
+		for (int i = 0; i <= 14; i += 1) {
+			gc.fillRect(i * 28, 0, 2, canvas.getHeight());
+			if (i%7 != 0 && i%7 !=3) {
+				gc.fillRect(i * 28 - 8, 0, 20, 70);
+			}
+		}
 	}
 
 	private void setupImage() {
@@ -142,7 +187,7 @@ public class Main extends Application {
 		slider.setLayoutY(160);
 		grid.getChildren().addAll(slider);
 	}
-	
+
 	private void setupVolume(Stage primaryStage) {
 		volume.setMin(0);
 		volume.setMax(200);
@@ -162,16 +207,16 @@ public class Main extends Application {
 
 	private void setupWelcome(Stage primaryStage) {
 		// TODO Auto-generated method stub
-		Text tempo = new Text("Tempo:");
+		Text tempo = new Text("Volume:");
 		tempo.setFont(Font.font("helvetica", FontWeight.NORMAL, 16));
 		tempo.setLayoutX(30);
 		tempo.setLayoutY(218);
 
-		Text volume = new Text("Volume:");
+		Text volume = new Text("Tempo:");
 		volume.setFont(Font.font("helvetica", FontWeight.NORMAL, 16));
 		volume.setLayoutX(30);
 		volume.setLayoutY(168);
-		
+
 		grid.getChildren().addAll(tempo, volume);
 	}
 
@@ -182,11 +227,14 @@ public class Main extends Application {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				chords = null;
-				chords = new Chords(5, tone,
-						tempoConversion(slider.getValue()), (int)volume.getValue());
-				chords.startMusic();
-				chords.start();
+				if (chords == null) {
+					chords = new Chords(5, tone, tempoConversion(slider
+							.getValue()), (int) volume.getValue());
+					chords.startMusic();
+					chords.start();
+				}
+				x += 30;
+				updateCanvas();
 			}
 		});
 		btn.setLayoutX(420);
