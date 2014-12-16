@@ -1,11 +1,7 @@
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -80,6 +76,8 @@ public class Main extends Application {
 	private static Canvas canvas = new Canvas(394, 100);
 	private static GraphicsContext gc = canvas.getGraphicsContext2D();
 
+	private static Image finger = new Image("finger.png");
+	
 	private void setupCanvas() {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -94,7 +92,8 @@ public class Main extends Application {
 				gc.fillRect(i * 28 - 8, 0, 20, 70);
 			}
 		}
-
+		gc.drawImage(finger, 5, 5);
+		
 		canvas.setLayoutX(25);
 		canvas.setLayoutY(275);
 		grid.getChildren().add(canvas);
@@ -107,10 +106,16 @@ public class Main extends Application {
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, canvas.getWidth(), 2);
 		gc.fillRect(0, canvas.getHeight()-2, canvas.getWidth(), 2);
+		
+		int indexNote = note%24 + 1;
+		
 		for (int i = 0; i <= 14; i += 1) {
 			gc.fillRect(i * 28, 0, 2, canvas.getHeight());
 			if (i%7 != 0 && i%7 !=3) {
 				gc.fillRect(i * 28 - 8, 0, 20, 70);
+			}
+			if (i == indexNote) {
+				gc.drawImage(finger, i*28, 5);
 			}
 		}
 	}
@@ -234,7 +239,7 @@ public class Main extends Application {
 					chords.start();
 				}
 				x += 30;
-				updateCanvas();
+				updateCanvas(61);
 			}
 		});
 		btn.setLayoutX(420);
