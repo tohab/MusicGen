@@ -29,6 +29,7 @@ public class Melody {
   
   public void playRoot () {
       mc.noteOn(root, 100);
+      Main.updateCanvas(root);
    
   
   }
