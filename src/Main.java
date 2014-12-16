@@ -61,7 +61,6 @@ public class Main extends Application {
 		// Set red button to close window.
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
-				System.out.println("Stage is closing");
 				System.exit(0);
 			}
 		});
@@ -77,47 +76,53 @@ public class Main extends Application {
 	private static GraphicsContext gc = canvas.getGraphicsContext2D();
 
 	private static Image finger = new Image("finger.png");
-	
+
+	static int[] keyPos = new int[24];
+
 	private void setupCanvas() {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		
 
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, canvas.getWidth(), 2);
-		gc.fillRect(0, canvas.getHeight()-2, canvas.getWidth(), 2);
-		for (int i = 0; i <= 14; i += 1) {
+		gc.fillRect(0, canvas.getHeight() - 2, canvas.getWidth(), 2);
+		int count = 0;
+		for (int i = 1; i <= 14; i += 1) {
 			gc.fillRect(i * 28, 0, 2, canvas.getHeight());
-			if (i%7 != 0 && i%7 !=3) {
+			keyPos[count] = i * 28;
+			count++;
+			if (i % 7 != 0 && i % 7 != 3) {
 				gc.fillRect(i * 28 - 8, 0, 20, 70);
+				keyPos[count] = i * 28 - 8;
+				count++;
 			}
 		}
 		gc.drawImage(finger, 5, 5);
-		
+
 		canvas.setLayoutX(25);
 		canvas.setLayoutY(275);
 		grid.getChildren().add(canvas);
 	}
 
 	public static void updateCanvas(int note) {
-		/*gc.setFill(Color.WHITE);
+		gc.fillRect(0, 0, 100, 100);
+		gc.setFill(Color.WHITE);
+		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, canvas.getWidth(), 2);
-		gc.fillRect(0, canvas.getHeight()-2, canvas.getWidth(), 2);
-		
-		int indexNote = note%24 + 1;
-		
+		gc.fillRect(0, canvas.getHeight() - 2, canvas.getWidth(), 2);
+
+
 		for (int i = 0; i <= 14; i += 1) {
 			gc.fillRect(i * 28, 0, 2, canvas.getHeight());
-			if (i%7 != 0 && i%7 !=3) {
+			if (i % 7 != 0 && i % 7 != 3) {
 				gc.fillRect(i * 28 - 8, 0, 20, 70);
 			}
-			if (i == indexNote) {
-				gc.drawImage(finger, i*28, 5);
-			}
-		}*/
+		}
+		gc.drawImage(finger, keyPos[note % 24], 5);
+
 	}
 
 	private void setupImage() {
@@ -153,7 +158,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				tone = 1;
-				System.out.println("major??");
+				updateCanvas(2);
 			}
 		});
 		rb1.setLayoutX(100);
@@ -253,6 +258,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				chords.stopMusic();
+				updateCanvas(30);
 				chords = null;
 			}
 		});
