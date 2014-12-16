@@ -59,90 +59,116 @@ public class Chords extends Thread {
 	public static void major(int key, int rep, int tempo, int volume)
 			throws InterruptedException, MidiUnavailableException {
 		for (int i = 0; i < rep; i++) {
+			Melody melody = new Melody(key,tempo,0);
+			melody.playRoot();
 			mc[5].noteOn(60 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(60 + key, 0);
 			mc[5].noteOn(67 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(67 + key, 0);
+			melody.stopRoot();
+			melody.playThirdMaj();
 			mc[5].noteOn(64 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(64 + key, 0);
 			mc[5].noteOn(67 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(67 + key, 0);
+			melody.stopThirdMaj();
 		}
 	}
 
 	public static void minor(int key, int rep, int tempo, int volume)
 			throws InterruptedException, MidiUnavailableException {
 		for (int i = 0; i < rep; i++) {
+			Melody melody = new Melody(key,tempo,0);
+			melody.playRoot();
 			mc[5].noteOn(60 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(60 + key, 0);
 			mc[5].noteOn(67 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(67 + key, 0);
+			melody.stopRoot();
+			melody.playThirdMin();
 			mc[5].noteOn(63 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(63 + key, 0);
 			mc[5].noteOn(67 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(67 + key, 0);
+			melody.stopThirdMin();
 		}
 	}
 
 	public static void firstinversionmaj(int key, int rep, int tempo, int volume)
 			throws InterruptedException, MidiUnavailableException {
 		for (int i = 0; i < rep; i++) {
+			Melody melody = new Melody(key,tempo,0);
+			melody.playRoot();
 			mc[5].noteOn(64 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(64 + key, 0);
 			mc[5].noteOn(72 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(72 + key, 0);
+			melody.stopRoot();
+			melody.playThirdMaj();
 			mc[5].noteOn(67 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(67 + key, 0);
 			mc[5].noteOn(72 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(72 + key, 0);
+			melody.stopThirdMaj();
 		}
 	}
 
 	public static void secondinversionmaj(int key, int rep, int tempo, int volume)
 			throws InterruptedException, MidiUnavailableException {
 		for (int i = 0; i < rep; i++) {
+			
+			Melody melody = new Melody(key,tempo,0);
+			melody.playRoot();
 			mc[5].noteOn(67 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(67 + key, 0);
 			mc[5].noteOn(76 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(76 + key, 0);
+			melody.stopRoot();
+			melody.playThirdMaj();
 			mc[5].noteOn(72 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(72 + key, 0);
 			mc[5].noteOn(76 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(76 + key, 0);
+			melody.stopThirdMaj();
 		}
 	}
 
 	public static void secondinversionmin(int key, int rep, int tempo, int volume)
 			throws InterruptedException, MidiUnavailableException {
 		for (int i = 0; i < rep; i++) {
+			Melody melody = new Melody(key,tempo,0);
+			melody.playRoot();
 			mc[5].noteOn(67 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(67 + key, 0);
 			mc[5].noteOn(75 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(75 + key, 0);
+			melody.stopRoot();
+			melody.playThirdMin();
 			mc[5].noteOn(72 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(72 + key, 0);
 			mc[5].noteOn(75 + key, volume);
 			new Thread().sleep(tempo);
 			mc[5].noteOff(75 + key, 0);
+			melody.stopThirdMin();
 		}
 	}
 
