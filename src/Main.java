@@ -100,7 +100,7 @@ public class Main extends Application {
 	}
 
 	public static void updateCanvas(int note) {
-		gc.setFill(Color.WHITE);
+		/*gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		gc.setFill(Color.BLACK);
@@ -117,7 +117,7 @@ public class Main extends Application {
 			if (i == indexNote) {
 				gc.drawImage(finger, i*28, 5);
 			}
-		}
+		}*/
 	}
 
 	private void setupImage() {
