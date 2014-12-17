@@ -29,8 +29,12 @@ public class Melody {
   
   public void playRoot () {
       mc.noteOn(root, 100);
-      Main.updateCanvas(root);
-   
+      Platform.runLater(new Runnable() { 
+          @Override
+          public void run() {
+          Main.updateCanvas(root);
+          }
+      });
   
   }
   
@@ -40,7 +44,12 @@ public class Melody {
   
   public void playThirdMaj () {
       mc.noteOn(thirdMaj, 100);
-   
+   Platform.runLater(new Runnable() { 
+          @Override
+          public void run() {
+          Main.updateCanvas(thirdMaj);
+          }
+      });
   
   }
   
@@ -49,6 +58,12 @@ public class Melody {
   }
   public void playThirdMin () {
 	  mc.noteOn(thirdMin, 100);
+	  Platform.runLater(new Runnable() { 
+          @Override
+          public void run() {
+          Main.updateCanvas(thirdMin);
+          }
+      });
   }
   
   public void stopThirdMin() {
